@@ -1,0 +1,27 @@
+extends ../layout
+
+block content
+  h1(class="title has-text-centered is-primary")= post ? "정보 수정": "국내공항 계류장 및 주차장 정보"
+  div(class="box mx-6")
+    form(action=post ? "/posts/"+post.shortId : "/posts", method="post")
+      div
+        label(class="label is-large") 공항명
+        div(class="control")
+        input(class="input" type="text" name="airport" value=post&&post.airport)
+      div
+        label(class="label is-large") 계류장면적(단위:제곱미터)
+        div(class="control")
+        input(class="input" type="text" name="area_apron" value=post&&post.area_apron)
+      div
+        label(class="label is-large") 항공기 계류장 주기 가능대수
+        div(class="control")
+        input(class="input" type="text" name="capacity_apron" value=post&&post.capacity_apron)
+      div
+        label(class="label is-large") 주차장면적(단위:제곱미터)
+        div(class="control")
+        input(class="input" type="text" name="area_parking" value=post&&post.area_parking)
+      div
+        label(class="label is-large") 자가용 주차장 주차 가능대수
+        div(class="control")
+        input(class="input" type="text" name="capacity_parking" value=post&&post.capacity_parking)
+      div: input(class="button is-info mt-2" type="submit" value=post ? "계류장 및 주차장 정보수정":"계류장 및 주차장 정보등록")

@@ -1,0 +1,30 @@
+extends ../layout
+include ../mixins/pagination
+block content
+  div
+    h1(class="title has-text-centered is-primary") 국내공항 계류장 및 주차장 정보
+  div(class="box mt-4")
+    table(class="table is-fullwidth")
+      thead
+        tr
+          td 페이지 당 정보 콘텐츠 갯수
+          td(colspan="2")
+            div(class="select is-small")
+              select(class="select" onChange="window.location.href=this.value")
+                option(value="/posts?perPage=10" selected= perPage == 10) 10
+                option(value="/posts?perPage=20" selected= perPage == 20) 20
+                option(value="/posts?perPage=50" selected= perPage == 50) 50
+                option(value="/posts?perPage=100" selected= perPage == 100) 100
+        tr
+          th 공항명
+          th 정보등록일자
+      tbody
+        each post in posts
+          tr
+            td: a(href="/posts/"+post.shortId)= post.airport
+            td= formatDate(post.createdAt)
+      tfoot 
+        tr
+          td(colspan=3)
+            +pagination("/posts")
+    a(href="/posts?write=true"): button(class="button is-info") 계류장 및 주차장 정보 등록
